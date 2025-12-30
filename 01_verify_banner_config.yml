@@ -1,0 +1,15 @@
+---
+- name: Verify The config banner
+  hosts: router
+  gather_facts: false
+  tasks:
+    - name: Run Command in Group Router IOS
+      cisco.ios.ios_command:
+        commands:
+          - 'show running-config | begin banner'
+      register: config_output
+
+    - name: Display output
+      ansible.builtin.debug:
+        msg: '{{ config_output }}'
+  
