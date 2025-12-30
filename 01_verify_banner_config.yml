@@ -6,10 +6,10 @@
     - name: Run Command in Group Router IOS
       cisco.ios.ios_command:
         commands:
-          - 'show running-config | begin banner'
+          - 'show ip interface brief'
       register: config_output
 
     - name: Display output
       ansible.builtin.debug:
-        msg: '{{ config_output }}'
+        msg: "{{ config_output }}"
   
