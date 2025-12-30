@@ -1,0 +1,44 @@
+---
+- name: DEMO BANNER IN CISCO DEVICE
+  hosts: cisco
+  gather_facts: false
+  tasks:
+    - name: Delete The banner existant
+      cisco.ios.ios_config:
+        lines:
+          - no banner login
+          - no banner exec
+          - no banner motd
+      tags: delet_all_banner
+
+    - name: Configure banner motd from file
+      cisco.ios.ios_banner:
+        banner: motd
+        multiline_delimiter: '#'
+        text: "{{lookup('file', './temp_files/raw_banner_motd.cfg') }}"  
+        state: present
+      tags: banner
+
+    - name: Configure banner login from file
+      cisco.ios.ios_banner:
+        banner: login
+        multiline_delimiter: '#'
+        text: "{{lookup('file', './temp_files/raw_banner_login.cfg') }}"  
+        state: present
+      register: output
+      tags:
+        - banner
+        - banner_login
+
+    - name: Configure banner exec from file
+      cisco.ios.ios_banner:
+        banner: exec
+        multiline_delimiter: '#'
+        text: "{{lookup('file', './temp_files/raw_banner_exec.cfg') }}" 
+        state: present
+      tags: banner
+
+    - name: Copy The running-config en startup-config
+      cisco.ios.ios_config:
+        save_when: always
+      tags: save_run
