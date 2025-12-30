@@ -1,0 +1,55 @@
+---
+- name: PLAYBOOK AJOUTER UN UTILISATEUR ET ASSURER QUE LES ANCIENS UTILISATEUR SONT MIS HORS JEU SAUF CERTAINS UTILISATEURS
+  hosts: '{{ TARGET }}'
+  gather_facts: false
+  tasks:
+    - name: Processus show command avant ajouter et de supprimer des anciens utilisateurs
+      cisco.ios.ios_command:
+        commands:
+          - 'show running | in username'
+      register: output_user
+
+    - name: Processus affichage des utilisateur existant avant ajouter ou de supprimer des anciens utilsateur
+      ansible.builtin.debug:
+        msg: 
+          - "{{ output_user.stdout[0] }}"
+
+    - name: Processus ajouter un utilisateur
+      cisco.ios.ios_config:
+        lines:
+          - 'username {{ USERNAME }} privilege {{ PRIVILLEGE }} algorithm-type {{ ALGORITHME_TYPE }} secret {{ SECRET }}'
+        save_when: always
+  
+    - name: Processus de recherche des utilisateur existant
+      cisco.ios.ios_command:
+        commands:
+          - 'show running | in username'
+      register: user_details
+
+    - name: Processus extraction des utilisateurs
+      ansible.builtin.set_fact:
+        extracted_user: "{{user_details | regex_findall('username.(\\S+)', '\\1')}}"
+
+    - name: Processus de suppression des anciens utilisateurs
+      cisco.ios.ios_command:
+        commands:
+          - 'configure terminal'
+          - 'no username {{item}}'
+          - 'end'
+      loop: "{{extracted_user}}"
+      when: 
+        - item != '{{ NO_DEL_USER_1 }}'
+        - item != '{{ USERNAME }}'
+
+
+    - name: Processus show command après avoir ajouter et est supprimer des anciens utilisateurs
+      cisco.ios.ios_command:
+        commands:
+          - 'show running | in username'
+      register: output_user
+
+    - name: Processus affichager des utilisateur existant une fois ajouter et supprimer des anciens utilsateurs
+      ansible.builtin.debug:
+        msg: 
+          - "{{ output_user.stdout[0] }}"
+
