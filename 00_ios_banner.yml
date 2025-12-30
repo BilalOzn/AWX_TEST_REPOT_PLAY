@@ -1,6 +1,6 @@
 ---
 - name: DEMO BANNER IN CISCO DEVICE
-  hosts: router
+  hosts: "{{ TARGET }}"
   gather_facts: false
   tasks:
     - name: Configure banner motd from file
