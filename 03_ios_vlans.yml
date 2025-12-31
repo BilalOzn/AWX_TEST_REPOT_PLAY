@@ -2,6 +2,13 @@
 - name: playbook création de vlan idempotanat (module ios_vlans) 
   hosts: switch
   gather_facts: false
+  vars_prompt:
+    - name: VLAN_ID
+      prompt: "Saisir l'id du vlan que vous souhaitez créer"
+      private: false
+    - name: VLAN_NAME
+      prompt: "Saisir le nom du vlan_id"
+      private: false
   tasks:
     - name: Processus de création de VLAN {{ VLAN_ID }} {{ VLAN_NAME }}
       cisco.ios.ios_vlans:
