@@ -34,4 +34,3 @@
     - name: SAUVGARDER LES MODIFICATION
       cisco.ios.ios_config:
         save_when: modified
-      register: save_output
