@@ -3,5 +3,8 @@ collections:
   - name: community.general
   - name: ansible.posix
   - name: ansible.netcommon
+    version: ">=5.0.0"
   - name: ansible.utils
+    version: ">=2.10.0"
   - name: cisco.ios
+    version: ">=5.0.0"
