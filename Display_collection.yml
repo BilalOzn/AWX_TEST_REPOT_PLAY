@@ -1,0 +1,10 @@
+- name: Vérifier collections
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Lister les collections
+      ansible.builtin.command: ansible-galaxy collection list
+      register: result
+
+    - debug:
+        var: result.stdout
