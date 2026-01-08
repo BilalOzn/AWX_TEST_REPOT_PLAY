@@ -3,6 +3,8 @@ collections:
   - name: community.general
     version: ">=8.0.0"
   - name: ansible.posix
-  - name: community.docker
-  - name: kubernetes.core
+  - name: ansible.netcommon
+  - name: ansible.utils
+  - name: cisco.ios 
+  - name: community.general 
 ```
