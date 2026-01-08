@@ -1,10 +1,8 @@
 ---
 collections:
   - name: community.general
-    version: ">=8.0.0"
   - name: ansible.posix
   - name: ansible.netcommon
   - name: ansible.utils
   - name: cisco.ios 
-  - name: community.general 
 ```
