@@ -1,0 +1,6 @@
+---
+collections:
+  - cisco.ios
+  - ansible.netcommon
+  - ansible.utils
+  - community.general
