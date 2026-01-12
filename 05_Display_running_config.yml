@@ -10,4 +10,4 @@
       register: result
 
     - name: Display Running-config
-      var: result
+      var: result.stdout
