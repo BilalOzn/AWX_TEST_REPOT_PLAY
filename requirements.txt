@@ -1,2 +1,6 @@
-ansible-pylibssh
-paramiko
+# Bibliothèques SSH
+ansible-pylibssh==1.2.2
+paramiko==3.4.0
+
+# Bibliothèques réseau Cisco (optionnel)
+netmiko
