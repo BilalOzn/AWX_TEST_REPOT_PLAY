@@ -7,7 +7,7 @@
       cisco.ios.ios_banner:
         banner: motd
         multiline_delimiter: '#'
-        text: "{{lookup('file', './raw_banner_motd.cfg') }}"  
+        text: "{{lookup('file', '../temp_files/raw_banner_motd.cfg') }}"  
         state: present
       tags: banner
 
@@ -15,7 +15,7 @@
       cisco.ios.ios_banner:
         banner: login
         multiline_delimiter: '#'
-        text: "{{lookup('file', './raw_banner_login.cfg') }}"  
+        text: "{{lookup('file', '../temp_files/raw_banner_login.cfg') }}"  
         state: present
       register: output
       tags:
@@ -26,7 +26,7 @@
       cisco.ios.ios_banner:
         banner: exec
         multiline_delimiter: '#'
-        text: "{{lookup('file', './raw_banner_exec.cfg') }}" 
+        text: "{{lookup('file', '../temp_files/raw_banner_exec.cfg') }}" 
         state: present
       tags: banner
 
