@@ -1,6 +1,6 @@
 --- 
 - name: UPDATE HOST NAME
-  hosts: cisco
+  hosts: '{{ TARGET }}'
   gather_facts: false
   tasks:
     - name: VERIFIE LA VARIABLE HOSTNAME
