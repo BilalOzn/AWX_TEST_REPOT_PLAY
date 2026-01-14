@@ -5,7 +5,7 @@
   tasks:
     - name: Display le path de stockage de backup
       ansible.builtin.debug:
-        var: inventory_hostname
+        var: playbook_dir
         
     - name: récupérer la Running Config
       cisco.ios.ios_config:
