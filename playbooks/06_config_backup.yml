@@ -1,0 +1,13 @@
+---
+- name: Backup Cisco Devices Configuration
+  hosts: '{{ TARGET }}'
+  gather_facts: false
+  tasks:
+    - name: Display lepath de stockage de backup
+      ansible.builtin.debub:
+        var: inventoty_hostname
+        
+    - name: récupérer la Running Config
+      cisco.ios.ios_config:
+        backup: true
+        
